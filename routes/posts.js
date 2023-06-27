@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
   const { title, content, password } = req.body;
   const post = await Post.findById(id);
   if (!post) {
-    return res.json({ message: '게이글 조회에 실패했습니다.' });
+    return res.json({ message: '게시글 조회에 실패했습니다.' });
   }
   const isPasswordCorrect = post.password === password;
 
@@ -78,7 +78,7 @@ router.delete('/:id', async (req, res) => {
   const post = await Post.findById(id);
 
   if (!post) {
-    return res.json({ message: '게시글 조회에 실패했습니다.' });
+    return res.json({ messgae: '게시글 조회에 실패했습니다.' });
   }
 
   const isPasswordCorrect = post.password === password;
