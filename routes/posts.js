@@ -5,7 +5,7 @@ const Post = require('../schemas/post');
 // 전체 게시글 조회 API
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find().select(['-password']); // [{},{},{}]
+    const posts = await Post.find().select(['-password', '-content']);
     res.json({ data: posts });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   const { user, title, content, password } = req.body;
   try {
     const post = await Post.create({ user, title, content, password });
-    res.json({ data: post });
+    res.json({ message: '게시글을 생성하였습니다.' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -61,7 +61,7 @@ router.put('/:id', async (req, res) => {
 
     try {
       const updatedPost = await post.save();
-      res.json({ data: updatedPost });
+      res.json({ message: '게시글을 수정하였습니다.' });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -85,9 +85,9 @@ router.delete('/:id', async (req, res) => {
 
   if (isPasswordCorrect) {
     try {
-      await post.deleteOne({id});
-			// post.remove(); 적용이 되지않아서 deleteOne으로 바꿈
-      res.json({ messgae: '게시글을 삭제했습니다.' });
+      await post.deleteOne({ id });
+      // post.remove(); 적용이 되지않아서 deleteOne으로 바꿈
+      res.json({ messgae: '게시글을 삭제하였습니다.' });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

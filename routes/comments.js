@@ -29,7 +29,7 @@ router.post('/:postId', async (req, res) => {
       password,
       postId,
     });
-    res.json({ data: comment });
+    res.json({ message: '댓글을 생성하였습니다.' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -65,7 +65,7 @@ router.put('/:id', async (req, res) => {
 
     try {
       await comment.save();
-      res.json({ messgae: '게시글을 수정되었습니다.' });
+      res.json({ messgae: '댓글을 수정하였습니다.' });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
